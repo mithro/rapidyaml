@@ -276,7 +276,7 @@ struct Tree
     Tree();
     ~Tree();
 
-    void reserve(size_t node_capacity, size_t arena_capacity);
+    void reserve(size_t node_capacity);
     void clear();
     void clear_arena();
 
