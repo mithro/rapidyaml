@@ -64,6 +64,9 @@ jobs:
     steps:
       - {name: checkout, uses: actions/checkout@v2, with: {submodules: recursive}}
       - {name: python3, uses: actions/setup-python@v2, with: {python-version: 3.7}}
+      - name: Add msbuild to PATH
+        uses: microsoft/setup-msbuild@v1.0.2
+        if: ${{ matrix.os == 'windows-2019' }}
       - {name: install requirements, run: source .github/reqs.sh && c4_install_test_requirements $OS}
       - {name: show info, run: source .github/setenv.sh && c4_show_info && which swig }
       - name: api-shared64-configure---------------------------------------------------
@@ -79,8 +82,7 @@ jobs:
                 ;;
               windows*)
                 . env/Scripts/activate
-                export CC=cl
-                export CXX=cl
+                set CMAKE_TOOLCHAIN_FILE=${{ env.VCPKG_DEST_WIN }}\scripts\buildsystems\vcpkg.cmake
                 ;;
             esac
             cd api/python
