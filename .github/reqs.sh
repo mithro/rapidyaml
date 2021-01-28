@@ -33,7 +33,6 @@ function c4_install_test_requirements()
             fi
             if [ "$API" == "ON" ] ; then
                 choco install swig
-                which swig
             fi
             return 0
             ;;
