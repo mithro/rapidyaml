@@ -25,6 +25,10 @@ function c4_install_test_requirements()
             if [ "$CMANY" == "ON" ] ; then
                 sudo pip3 install cmany
             fi
+            if [ "$API" == "ON" ] ; then
+		brew install swig
+                which swig
+            fi
             return 0
             ;;
         win*)
